@@ -1,0 +1,17 @@
+{
+  "name": "radhe-sweets-label-generator",
+  "version": "1.0.0",
+  "description": "Professional Label Generator for Radhe Sweets",
+  "main": "label.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static HTML - no build required'",
+    "start": "npx serve ."
+  },
+  "keywords": ["label-generator", "sweets", "food-labels", "thermal-printer"],
+  "author": "Radhe Sweets",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}
