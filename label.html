@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Radhe Sweets - Professional Label Generator</title>
   
   <style>
@@ -48,6 +49,10 @@
       box-sizing: border-box;
       font-size: 14px;
       transition: all 0.3s;
+      /* Mobile touch optimization */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
     }
     
     .form input:focus, .form textarea:focus, .form select:focus {
@@ -68,6 +73,9 @@
       cursor: pointer;
       transition: all 0.3s;
       margin-top: 10px;
+      /* Mobile touch optimization */
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
     
     .form button:hover {
@@ -329,41 +337,6 @@
       font-weight: bold;
     }
 
-    /* Responsive design */
-    @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-        margin: 10px;
-      }
-      .form {
-        width: 100%;
-        margin-bottom: 20px;
-      }
-      .label {
-        width: 100%;
-        height: auto;
-        min-height: 100mm;
-      }
-    }
-
-    @media print {
-      body { 
-        margin: 0; 
-        background: white;
-      }
-      .form { display: none; }
-      .label {
-        border: none;
-        box-shadow: none;
-        page-break-after: always;
-        overflow: visible;
-      }
-    }
-
-    @page {
-      margin: 0;
-    }
-
     /* Size selector styling */
     .size-selector {
       background: #f8f9fa;
@@ -391,6 +364,16 @@
        right: 20px;
        width: 300px;
        z-index: 1000;
+     }
+     
+     /* Desktop search positioning */
+     @media (min-width: 769px) {
+       .search-container {
+         position: absolute;
+         top: 20px;
+         right: 20px;
+         width: 300px;
+       }
      }
      
      .search-input {
@@ -494,19 +477,207 @@
       zoom: 1;
     }
 
+    /* Mobile Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+        margin: 10px;
+        gap: 15px;
+      }
+      
+      .form {
+        width: 100%;
+        padding: 20px;
+        margin-bottom: 15px;
+        max-height: none;
+        overflow-y: visible;
+      }
+      
+      .form h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+      }
+      
+      .form .row {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .form .field-group {
+        margin-bottom: 15px;
+      }
+      
+      .form input, .form textarea, .form select {
+        padding: 14px;
+        font-size: 16px; /* Prevent zoom on iOS */
+        margin-bottom: 15px;
+      }
+      
+      .form button {
+        padding: 16px;
+        font-size: 16px;
+        margin-top: 15px;
+      }
+      
+      .size-selector {
+        padding: 12px;
+        margin-bottom: 15px;
+      }
+      
+      .size-selector label {
+        font-size: 14px;
+        margin-bottom: 8px;
+      }
+      
+      .size-selector select {
+        font-size: 14px;
+        padding: 12px;
+      }
+      
+      /* Search bar mobile optimization */
+      .search-container {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 100%;
+        margin-bottom: 20px;
+        order: -1; /* Move search to top on mobile */
+      }
+      
+      .search-input {
+        padding: 14px 16px;
+        font-size: 16px;
+        border-radius: 8px;
+      }
+      
+      .search-results {
+        position: relative;
+        top: auto;
+        max-height: 200px;
+        border-radius: 8px;
+        margin-top: 5px;
+      }
+      
+      /* Label container mobile optimization */
+      .label-container {
+        gap: 15px;
+        padding: 0 10px;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      /* Keep label sizes exactly the same on mobile */
+      .label {
+        transform: scale(1);
+        transform-origin: center;
+        margin: 0 auto;
+        flex-shrink: 0;
+      }
+      
+      /* Ensure labels are centered and visible on mobile */
+      .label.size-small,
+      .label.size-medium,
+      .label.size-large,
+      .label.size-horizontal {
+        transform: scale(1);
+        transform-origin: center;
+        flex-shrink: 0;
+      }
+      
+      /* Mobile label preview optimization */
+      .label-container {
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    /* Small mobile devices */
+    @media (max-width: 480px) {
+      body {
+        margin: 5px;
+        gap: 10px;
+      }
+      
+      .form {
+        padding: 15px;
+      }
+      
+      .form h2 {
+        font-size: 18px;
+        margin-bottom: 15px;
+      }
+      
+      .form input, .form textarea, .form select {
+        padding: 12px;
+        margin-bottom: 12px;
+      }
+      
+      .form button {
+        padding: 14px;
+      }
+      
+      .size-selector {
+        padding: 10px;
+      }
+      
+      .search-container {
+        margin-bottom: 15px;
+      }
+      
+      .search-input {
+        padding: 12px 14px;
+      }
+    }
+
+    /* Tablet optimization */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      body {
+        gap: 15px;
+        margin: 15px;
+      }
+      
+      .form {
+        width: 500px;
+        padding: 25px;
+      }
+      
+      .search-container {
+        width: 250px;
+      }
+    }
+
+    @media print {
+      body { 
+        margin: 0; 
+        background: white;
+      }
+      .form { display: none; }
+      .label {
+        border: none;
+        box-shadow: none;
+        page-break-after: always;
+        overflow: visible;
+        transform: scale(1) !important;
+      }
+    }
+
+    @page {
+      margin: 0;
+    }
 
   </style>
 </head>
   <body>
-    <!-- Search Bar -->
+    <!-- Input Form -->
+    <div class="form">
+    <h2>🎯 Radhe Sweets Label Generator</h2>
+    
+    <!-- Search Bar - Mobile Optimized -->
     <div class="search-container">
       <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search for Gujarati sweets & farsan...">
       <div class="search-results" id="searchResults"></div>
     </div>
-    
-    <!-- Input Form -->
-    <div class="form">
-    <h2>🎯 Radhe Sweets Label Generator</h2>
     
               <div class="size-selector">
        <label>📏 Label Size (GK420d Optimized):</label>
